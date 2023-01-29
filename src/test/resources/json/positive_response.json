@@ -1,0 +1,26 @@
+{
+  "Date": "2023-01-10T11:30:00+03:00",
+  "PreviousDate": "2022-12-31T11:30:00+03:00",
+  "PreviousURL": "www.cbr-xml-daily.ru/archive/2023/01/10/daily_json.js",
+  "Timestamp": "2023-01-10T15:00:00+03:00",
+  "Valute": {
+    "AUD": {
+      "ID": "R01010",
+      "NumCode": "036",
+      "CharCode": "AUD",
+      "Nominal": 1,
+      "Name": "РђРІСЃС‚СЂР°Р»РёР№СЃРєРёР№ РґРѕР»Р»Р°СЂ",
+      "Value": 48.711,
+      "Previous": 47.6537
+    },
+    "USD": {
+      "ID": "R01235",
+      "NumCode": "840",
+      "CharCode": "USD",
+      "Nominal": 1,
+      "Name": "Р”РѕР»Р»Р°СЂ РЎРЁРђ",
+      "Value": 70.3002,
+      "Previous": 70.3375
+    }
+  }
+}
