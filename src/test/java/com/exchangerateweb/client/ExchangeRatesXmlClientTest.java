@@ -31,7 +31,7 @@ public class ExchangeRatesXmlClientTest {
     public void happyPathTest() throws IOException {
         XmlMapper xmlMapper = new XmlMapper();
         xmlMapper.registerModule(new JavaTimeModule());
-        String xml = Files.readString(Path.of("src/test/resources/xml/positive_response.xml"), StandardCharsets.UTF_8);
+        String xml = Files.readString(Path.of("src/test/resources/__files/xml/positive_response.xml"), StandardCharsets.UTF_8);
         ExchangeRatesXmlDTO dto = xmlMapper.readValue(xml, ExchangeRatesXmlDTO.class);
 
         when(restTemplate.getForObject(anyString(), any())).thenReturn(dto);

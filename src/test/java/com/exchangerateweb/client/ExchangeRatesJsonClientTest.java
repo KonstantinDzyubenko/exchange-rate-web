@@ -32,7 +32,7 @@ public class ExchangeRatesJsonClientTest {
     public void happyPathTest() throws IOException {
         ObjectMapper mapper = new ObjectMapper();
         mapper.registerModule(new JavaTimeModule());
-        String json = Files.readString(Path.of("src/test/resources/json/positive_response.json"), StandardCharsets.UTF_8);
+        String json = Files.readString(Path.of("src/test/resources/__files/json/positive_response.json"), StandardCharsets.UTF_8);
         ExchangeRatesJsonDTO dto = mapper.readValue(json, ExchangeRatesJsonDTO.class);
 
         when(restTemplate.getForObject(anyString(), any())).thenReturn(dto);

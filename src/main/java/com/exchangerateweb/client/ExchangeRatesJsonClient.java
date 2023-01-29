@@ -26,11 +26,11 @@ public class ExchangeRatesJsonClient {
         try {
             return restTemplate.getForObject(makeURLByDate(date), ExchangeRatesJsonDTO.class);
         } catch (Exception e) {
-            throw new RuntimeException("Unable to get exchange rate data from cbr.ru");
+            throw new RuntimeException("Unable to get exchange rate data from the source.");
         }
     }
 
-    String makeURLByDate(LocalDate date) {
+    private String makeURLByDate(LocalDate date) {
         return String.format(urlTemplate, date.format(formatter));
     }
 }
