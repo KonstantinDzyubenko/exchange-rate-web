@@ -1,8 +1,7 @@
 package com.exchangerateweb.service;
 
-import com.exchangerateweb.client.dto.ExchangeRatesJsonDTO;
-import com.exchangerateweb.repository.dto.ExchangeRatesDatabaseDTO;
 import com.exchangerateweb.repository.ExchangeRatesRepository;
+import com.exchangerateweb.repository.dto.ExchangeRatesDatabaseDTO;
 import com.exchangerateweb.router.DataSource;
 import org.springframework.stereotype.Component;
 

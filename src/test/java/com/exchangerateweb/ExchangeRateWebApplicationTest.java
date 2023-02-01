@@ -1,5 +1,6 @@
 package com.exchangerateweb;
 
+import com.exchangerateweb.repository.ExchangeRatesRepository;
 import com.github.tomakehurst.wiremock.WireMockServer;
 import com.github.tomakehurst.wiremock.client.WireMock;
 import org.junit.jupiter.api.BeforeAll;
@@ -12,13 +13,16 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.ActiveProfiles;
+import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.transaction.annotation.Transactional;
 
 import static com.github.tomakehurst.wiremock.client.WireMock.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 
 @SpringBootTest
+@Transactional
 @AutoConfigureMockMvc
 @AutoConfigureWireMock(port = 0)
 @ActiveProfiles("integration")
@@ -27,6 +31,8 @@ public class ExchangeRateWebApplicationTest {
     private WireMockServer wireMockServer;
     @Autowired
     private MockMvc mockMvc;
+    @Autowired
+    private ExchangeRatesRepository repository;
 
     @BeforeAll
     public static void setup() {
@@ -72,11 +78,31 @@ public class ExchangeRateWebApplicationTest {
     }
 
     @Test
+    @Sql("/__files/database/data.sql")
+    public void happyPathDatabaseTest() throws Exception {
+        mockMvc.perform(get("/exchangerate")
+                        .param("currency", "AUD")
+                        .param("date", "2022-01-10")
+                        .param("dataSource", "database"))
+                .andExpect(content().string("47.6537"));
+    }
+
+    @Test
     public void noCurrencyFoundTest() throws Exception {
         mockMvc.perform(get("/exchangerate")
                         .param("currency", "XXX")
                         .param("date", "2022-01-30")
                         .param("dataSource", "json"))
+                .andExpect(content().string("No such currency found."));
+    }
+
+    @Test
+    @Sql("/__files/database/data.sql")
+    public void noCurrencyFoundInDatabaseTest() throws Exception {
+        mockMvc.perform(get("/exchangerate")
+                        .param("currency", "XXX")
+                        .param("date", "2022-01-30")
+                        .param("dataSource", "database"))
                 .andExpect(content().string("No such currency found."));
     }
 
