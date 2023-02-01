@@ -4,6 +4,7 @@ import com.exchangerateweb.router.DataSource;
 import com.exchangerateweb.router.ExchangeRateRouter;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.PastOrPresent;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -12,6 +13,7 @@ import java.time.LocalDate;
 
 @Validated
 @RestController
+@Slf4j
 public class ExchangeRateController {
     private final ExchangeRateRouter router;
 
